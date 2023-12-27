@@ -1,5 +1,25 @@
-function saveTasks(){
+function saveTasks() {
+    let taskList = document.getElementById("task-list");
+    let tasks = [];
+    if (taskList) {
+        for (let i = 0; i < taskList.children.length; i++) {
+            let taskSpan = taskList.children[i].querySelector("span");
+            if (taskSpan) {
+                tasks.push(taskSpan.textContent);
+            }
+        }
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+}
 
+function loadTasks() {
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    if (tasks) {
+        for (let i = 0; i < tasks.length; i++) {
+            addTask(tasks[i]);
+        }
+    }
 }
 
 
@@ -21,7 +41,9 @@ function addTask(taskText) {
     let removeButton = document.createElement("Button");
     removeButton.textContent = "remove";
     removeButton.addEventListener("click", function () {
-        taskList.remove(taskItem);
+        taskList.removeChild(taskItem);
+        saveTasks();
+
     })
     let editButton = document.createElement("button");
     editButton.textContent = "edit";
@@ -29,6 +51,7 @@ function addTask(taskText) {
         let newText = prompt("Enter new text", taskText);
         if (newText !== null) {
             taskSpan.textContent = newText;
+            saveTasks()
         }
     })
 
@@ -36,6 +59,9 @@ function addTask(taskText) {
     taskItem.appendChild(removeButton);
 
     taskList.appendChild(taskItem);
+    saveTasks()
 
 }
-document.getElementById("add-button").addEventListener("click",addTaskByButton);
+
+document.getElementById("add-button").addEventListener("click", addTaskByButton);
+window.onload = loadTasks;
