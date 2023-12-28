@@ -1,4 +1,4 @@
-export let isToggle = false;
+let isToggle = false;
 export function changeTheme(){
     let body = document.body.style;
     let inputs = document.getElementsByTagName("input");
