@@ -38,7 +38,7 @@ export function changeTheme(){
 
 }
 export function setTheme(status){
-    if ("true"==status){
+    if ("true"===status){
         isToggle = !isToggle;
     }
     changeTheme()

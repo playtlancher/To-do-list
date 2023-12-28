@@ -1,4 +1,4 @@
-import {changeTheme, setTheme,isToggle} from "./theme.js";
+import {changeTheme, setTheme} from "./theme.js";
 
 function saveTasks() {
     let taskList = document.getElementById("task-list");
