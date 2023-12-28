@@ -17,3 +17,12 @@ form{
 ul li > *{
     margin-right: 0.7rem;
 }
+input{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px  15px;
+    outline: none;
+}
+input:focus{
+    border: 1px solid black;
+}

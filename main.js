@@ -1,3 +1,5 @@
+import {changeTheme, setTheme,isToggle} from "./theme.js";
+
 function saveTasks() {
     let taskList = document.getElementById("task-list");
     let tasks = [];
@@ -13,6 +15,7 @@ function saveTasks() {
 }
 
 function loadTasks() {
+    setTheme(localStorage.getItem("theme"));
     let tasks = JSON.parse(localStorage.getItem("tasks"));
 
     if (tasks) {
@@ -25,8 +28,10 @@ function loadTasks() {
 
 function addTaskByButton() {
     let taskText = document.getElementById("task-input");
-    addTask(taskText.value);
-    taskText.value = "";
+    if (taskText.value !=="") {
+        addTask(taskText.value);
+        taskText.value = "";
+    }
 
 }
 
@@ -65,3 +70,4 @@ function addTask(taskText) {
 
 document.getElementById("add-button").addEventListener("click", addTaskByButton);
 window.onload = loadTasks;
+document.getElementById("themeButton").addEventListener("click",changeTheme)
