@@ -15,7 +15,6 @@ function saveTasks() {
 }
 
 function loadTasks() {
-    setTheme(localStorage.getItem("theme"));
     let tasks = JSON.parse(localStorage.getItem("tasks"));
 
     if (tasks) {
@@ -23,6 +22,7 @@ function loadTasks() {
             addTask(tasks[i]);
         }
     }
+    setTheme(localStorage.getItem("theme"));
 }
 
 
@@ -46,9 +46,11 @@ function addTask(taskText) {
     let removeButton = document.createElement("Button");
     removeButton.textContent = "remove";
     removeButton.addEventListener("click", function () {
-        taskList.removeChild(taskItem);
-        saveTasks();
-
+        taskItem.classList.add('disappear-animation');
+        taskItem.addEventListener("animationend",function (){
+            taskList.removeChild(taskItem);
+            saveTasks();
+        })
     })
     let editButton = document.createElement("button");
     editButton.textContent = "edit";
@@ -59,6 +61,7 @@ function addTask(taskText) {
             saveTasks()
         }
     })
+    taskItem.classList.add('fade-in');
 
     taskItem.appendChild(editButton);
     taskItem.appendChild(removeButton);

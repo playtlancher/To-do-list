@@ -1,36 +1,110 @@
+:root{
+    --input-color: "white";
+    --border-color: "lightgray";
+    --text-color: "black";
+    --background-color: "white"
+}
 li{
     list-style-type: none;
-}
-.content-center{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-end;
+    background: var(--input-color);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 ul li {
     margin-top: 1.5rem;
 }
-form{
+ul{
+    padding: 10px;
+}
+.flex-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+form {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
 }
-ul li > *{
+
+ul li > * {
     margin-right: 0.7rem;
 }
-input{
-    border: 1px solid lightgrey;
+
+input {
+    background: var(--input-color);
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    padding: 10px  15px;
+    padding: 10px 15px;
     outline: none;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
 }
-input:focus{
-    border: 1px solid black;
+input:focus {
+    border: 1px solid var(--text-color);
 }
-*{
+
+* {
     font-family: sans-serif;
 }
-button{
-    border-radius: 5px;
-    border: 1px solid lightgrey;
+body{
+    background: var(--background-color);
+    color: var(--text-color);
+}
 
+button {
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes disappearAnimation {
+    0% {
+        transform: scaleX(1) scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.5) scaleX(0.5);
+    }
+    100% {
+        transform: scaleX(1) scaleY(1);
+    }
+}
+
+.disappear-animation {
+    animation: disappearAnimation 0.3s ease-out;
 }

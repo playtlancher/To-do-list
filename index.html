@@ -9,12 +9,17 @@
 <button id="themeButton">
     <img src="./theme.svg" alt="change theme button img">
 </button>
-<form onsubmit="return false">
-    <input id="task-input" placeholder="Enter the task here">
-    <button id="add-button">Add</button>
-</form>
-<ul class="content-center" id="task-list">
-</ul>
+<div class="grid-container">
+    <div></div>
+    <div>
+    <form onsubmit="return false">
+        <input id="task-input" placeholder="Enter the task here">
+        <button id="add-button">Add</button>
+    </form>
+    <ul class="content-center flex-end" id="task-list">
+    </ul>
+    </div>
+</div>
 <script type="module" src="main.js"></script>
 </body>
 </html>
