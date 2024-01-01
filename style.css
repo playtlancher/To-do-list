@@ -36,9 +36,10 @@ ul li > * {
     margin-right: 0.7rem;
 }
 
-input {
+form input {
     background: var(--input-color);
     display: block;
+    color: var(--text-color);
     width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -107,4 +108,26 @@ button {
 
 .disappear-animation {
     animation: disappearAnimation 0.3s ease-out;
+}
+li span{
+    transition: transform 1s ease;
+}
+.text {
+    color: var(--text-color);
+}
+.text::before {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: white;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+input:checked + .text::before {
+    transform: scaleX(1);
 }
