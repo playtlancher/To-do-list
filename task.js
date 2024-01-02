@@ -1,5 +1,5 @@
 import {setTheme} from "./theme.js";
-
+import {openModal} from "./modal.js";
 
 let currentPage = 0;
 let rows = 5;
@@ -67,11 +67,7 @@ export function addTask(taskText , status = false) {
     let editButton = document.createElement("button");
     editButton.textContent = "edit";
     editButton.addEventListener("click", function () {
-        let newText = prompt("Enter new text", taskText);
-        if (newText !== null) {
-            taskSpan.textContent = newText;
-            saveTasks()
-        }
+        openModal(taskSpan);
     })
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -112,6 +108,7 @@ export function displayPagination() {
     for (let i = 1; i <= totalPages; i++) {
         let pageButton = document.createElement("button");
         pageButton.textContent = i;
+        pageButton.classList.add("pagination-btn");
         pageButton.addEventListener("click", function () {
             displayList(i);
         })
