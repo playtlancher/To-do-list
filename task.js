@@ -100,19 +100,19 @@ export function addTask(taskText , status = false) {
 
 export function displayPagination() {
     let taskList = document.getElementById("task-list");
-    console.log(taskList.children.length)
     let totalPages = Math.ceil(taskList.children.length / rows);
-    console.log(totalPages)
     let paginationContainer = document.getElementById("pagination-container");
     paginationContainer.innerHTML = "";
-    for (let i = 1; i <= totalPages; i++) {
-        let pageButton = document.createElement("button");
-        pageButton.textContent = i;
-        pageButton.classList.add("pagination-btn");
-        pageButton.addEventListener("click", function () {
-            displayList(i);
-        })
-        paginationContainer.appendChild(pageButton);
+    if(totalPages!==1) {
+        for (let i = 1; i <= totalPages; i++) {
+            let pageButton = document.createElement("button");
+            pageButton.textContent = i;
+            pageButton.classList.add("pagination-btn");
+            pageButton.addEventListener("click", function () {
+                displayList(i);
+            })
+            paginationContainer.appendChild(pageButton);
+        }
     }
 }
 
