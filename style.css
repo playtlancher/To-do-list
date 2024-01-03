@@ -1,10 +1,11 @@
-:root{
+:root {
     --input-color: "white";
     --border-color: "lightgray";
     --text-color: "black";
     --background-color: "white";
 }
-li{
+
+li {
     list-style-type: none;
     display: flex;
     justify-content: flex-end;
@@ -15,17 +16,21 @@ li{
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 ul li {
     margin-top: 1.5rem;
 }
-ul{
+
+ul {
     padding: 10px;
 }
+
 .flex-end {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
+
 form {
     margin-top: 2rem;
     display: flex;
@@ -49,6 +54,7 @@ form input {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 }
+
 input:focus {
     border: 2px solid var(--text-color);
 }
@@ -56,7 +62,8 @@ input:focus {
 * {
     font-family: sans-serif;
 }
-body{
+
+body {
     background: var(--background-color);
     color: var(--text-color);
 }
@@ -78,7 +85,8 @@ button {
     flex-direction: column;
     align-items: center;
 }
-.content-center{
+
+.content-center {
     display: flex;
     justify-content: center;
 }
@@ -113,32 +121,37 @@ button {
 .disappear-animation {
     animation: disappearAnimation 0.3s ease-out;
 }
-li span{
+
+li span {
     transition: transform 1s ease;
 }
+
 @media only screen and (max-width: 600px) {
     .grid-container {
         grid-template-columns: 1fr;
     }
 }
-#modal-btn{
+
+#modal-btn {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-.modal{
+.modal {
     border: 2px solid black;
     display: none;
-    padding: 1.5rem;
-    color:white;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     width: 20rem;
     background: #333;
     border-radius: 6px;
     position: absolute;
-    top: 20%;
-    left: 40%;
+    z-index: 1;
 }
-.pagination-btn{
+
+.pagination-btn {
     border-radius: 50%;
     margin-right: 0.7rem;
 }

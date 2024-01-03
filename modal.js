@@ -14,8 +14,7 @@ export function closeModal() {
         span.textContent = input.value;
         saveTasks();
     }
-    modal.classList.add('disappear-animation');
-    modal.addEventListener("animationend", function () {
-        modal.style.display = "none";
-    })
+
+    modal.style.display = "none";
+
 }

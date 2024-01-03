@@ -29,12 +29,15 @@ export function loadTasks() {
 
     if (tasks && status) {
         for (let i = 0; i < tasks.length; i++) {
-            addTask(tasks[i],status[i]);
+            addTask(tasks[i], status[i]);
         }
     }
-    setTheme(localStorage.getItem("theme"));
     displayPagination();
     displayList();
+}
+
+export function loadTheme() {
+    setTheme(localStorage.getItem("theme"));
 }
 
 
@@ -47,7 +50,7 @@ export function addTaskByButton() {
 
 }
 
-export function addTask(taskText , status = false) {
+export function addTask(taskText, status = false) {
     let taskList = document.getElementById("task-list");
 
     let taskItem = document.createElement("li");
@@ -103,7 +106,7 @@ export function displayPagination() {
     let totalPages = Math.ceil(taskList.children.length / rows);
     let paginationContainer = document.getElementById("pagination-container");
     paginationContainer.innerHTML = "";
-    if(totalPages!==1) {
+    if (totalPages !== 1) {
         for (let i = 1; i <= totalPages; i++) {
             let pageButton = document.createElement("button");
             pageButton.textContent = i;
@@ -132,3 +135,26 @@ export function displayList(pageNumber = 1) {
         currentPage = pageNumber;
     }
 }
+
+export async function fetchAndFillList() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+        const json = await response.json();
+
+        for (let i = 0; i < 30; i++) {
+            let text = json[i].title;
+            let status = json[i].completed;
+            addTask(text, status);
+        }
+        let taskList = document.getElementById("task-list");
+        for (let i = rows; i < taskList.children.length; i++) {
+            taskList.children[i].style.display = "none";
+        }
+
+        displayPagination();
+        displayList();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
