@@ -1,35 +1,38 @@
 import {setTheme} from "./theme.js";
-import {openModal} from "./modal.js";
+import {openEditModal, openInfoModal} from "./modal.js";
 
 let currentPage = 0;
 let rows = 5;
 
 export function saveTasks() {
     let taskList = document.getElementById("task-list");
-    // let checkbox = document.getElementsByClassName("checkbox");
     let tasks = [];
     let taskCheckStatus = [];
+    let descriptions = [];
     if (taskList) {
         for (let i = 0; i < taskList.children.length; i++) {
             let taskSpan = taskList.children[i].querySelector("span");
-            let status = taskList.children[i].querySelector("input").checked;
-            taskCheckStatus.push(status);
-            if (taskSpan) {
-                tasks.push(taskSpan.textContent);
-            }
+            let status = taskList.children[i].querySelector("input");
+            let description = taskList.children[i].querySelector("p");
+            tasks.push(taskSpan.textContent);
+            taskCheckStatus.push(status.checked);
+            descriptions.push(description.textContent);
+
         }
         localStorage.setItem("tasks", JSON.stringify(tasks));
         localStorage.setItem("status", JSON.stringify(taskCheckStatus));
+        localStorage.setItem("descriptions", JSON.stringify(descriptions));
     }
 }
 
 export function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
     let status = JSON.parse(localStorage.getItem("status"));
+    let descriptions = JSON.parse(localStorage.getItem("descriptions"));
 
-    if (tasks && status) {
+    if (tasks) {
         for (let i = 0; i < tasks.length; i++) {
-            addTask(tasks[i], status[i]);
+            addTask(tasks[i], descriptions[i], status[i]);
         }
     }
     displayPagination();
@@ -42,21 +45,28 @@ export function loadTheme() {
 
 
 export function addTaskByButton() {
-    let taskText = document.getElementById("task-input");
-    if (taskText.value !== "") {
-        addTask(taskText.value);
-        taskText.value = "";
+    let header = document.getElementById("header-input");
+    let description = document.getElementById("text-input");
+    if (header.value !== "" && description.value !== "") {
+        addTask(header.value, description.value);
+        header.value = "";
+        description.value = "";
     }
 
 }
 
-export function addTask(taskText, status = false) {
+export function addTask(taskText, description, status = false) {
     let taskList = document.getElementById("task-list");
 
     let taskItem = document.createElement("li");
     let taskSpan = document.createElement("span");
     taskSpan.textContent = taskText;
-    taskItem.appendChild(taskSpan);
+
+
+    let descriptionText = document.createElement("p");
+    descriptionText.textContent = description;
+    descriptionText.style.display = "none";
+
 
     let removeButton = document.createElement("Button");
     removeButton.textContent = "remove";
@@ -67,11 +77,15 @@ export function addTask(taskText, status = false) {
             saveTasks();
         })
     })
+
+
     let editButton = document.createElement("button");
     editButton.textContent = "edit";
     editButton.addEventListener("click", function () {
-        openModal(taskSpan);
+        openEditModal(taskSpan);
     })
+
+
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = status;
@@ -80,6 +94,7 @@ export function addTask(taskText, status = false) {
         taskSpan.style.textDecoration = "line-through";
     }
     checkbox.addEventListener("change", function () {
+
         if (checkbox.checked) {
             taskSpan.style.transform = "rotateX(360deg)";
             taskSpan.style.textDecoration = "line-through";
@@ -91,9 +106,18 @@ export function addTask(taskText, status = false) {
     })
     taskItem.classList.add('fade-in');
 
+
+    taskItem.appendChild(taskSpan);
+    taskItem.appendChild(descriptionText);
     taskItem.appendChild(editButton);
     taskItem.appendChild(removeButton);
     taskItem.appendChild(checkbox);
+    taskItem.addEventListener("click", function (event) {
+        let target = event.target;
+        if (target.tagName === 'LI' || target.tagName === "SPAN") {
+            openInfoModal(taskItem);
+        }
+    })
 
     taskList.appendChild(taskItem);
     saveTasks()

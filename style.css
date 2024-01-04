@@ -25,16 +25,21 @@ ul {
     padding: 10px;
 }
 
-.flex-end {
+form {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
 }
 
-form {
-    margin-top: 2rem;
-    display: flex;
+
+form input {
+    margin-bottom: 2rem;
+}
+
+form button {
     justify-content: center;
+    height: 1.5rem;
+    width: 3rem;
 }
 
 ul li > * {
@@ -146,6 +151,7 @@ li span {
     color: white;
     width: 20rem;
     background: #333;
+    padding: 0.8rem;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
@@ -154,4 +160,14 @@ li span {
 .pagination-btn {
     border-radius: 50%;
     margin-right: 0.7rem;
+}
+
+.margin-left {
+    margin-left: auto;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
