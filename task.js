@@ -4,35 +4,46 @@ import {openEditModal, openInfoModal} from "./modal.js";
 let currentPage = 0;
 let rows = 5;
 
+class Task {
+    date;
+    task;
+    status;
+    description;
+}
+
 export function saveTasks() {
     let taskList = document.getElementById("task-list");
+
+
     let tasks = [];
-    let taskCheckStatus = [];
-    let descriptions = [];
+
     if (taskList) {
         for (let i = 0; i < taskList.children.length; i++) {
-            let taskSpan = taskList.children[i].querySelector("span");
-            let status = taskList.children[i].querySelector("input");
-            let description = taskList.children[i].querySelector("p");
-            tasks.push(taskSpan.textContent);
-            taskCheckStatus.push(status.checked);
-            descriptions.push(description.textContent);
+            let task = new Task();
+            let taskSpan = taskList.children[i].getElementsByClassName("task")[0].textContent;
+            let dateEl = taskList.children[i].getElementsByClassName("date")[0].textContent;
+            let description = taskList.children[i].getElementsByClassName("description")[0].textContent;
+            let status = taskList.children[i].querySelector("input").checked;
+
+            task.task = taskSpan;
+            task.date = dateEl;
+            task.description = description;
+            task.status = status;
+            tasks.push(task);
 
         }
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        localStorage.setItem("status", JSON.stringify(taskCheckStatus));
-        localStorage.setItem("descriptions", JSON.stringify(descriptions));
+
     }
 }
 
 export function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
-    let status = JSON.parse(localStorage.getItem("status"));
-    let descriptions = JSON.parse(localStorage.getItem("descriptions"));
+
 
     if (tasks) {
         for (let i = 0; i < tasks.length; i++) {
-            addTask(tasks[i], descriptions[i], status[i]);
+            addTask(tasks[i].task, tasks[i].description, tasks[i].date, tasks[i].status);
         }
     }
     displayPagination();
@@ -45,27 +56,39 @@ export function loadTheme() {
 
 
 export function addTaskByButton() {
+    const today = new Date();
     let header = document.getElementById("header-input");
     let description = document.getElementById("text-input");
-    if (header.value !== "" && description.value !== "") {
-        addTask(header.value, description.value);
+    let dateInput = document.getElementById("deadline");
+    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + ":" + dateInput.value;
+    if (header.value !== "" && description.value !== "" && dateInput.value !== "") {
+        addTask(header.value, description.value, date);
         header.value = "";
         description.value = "";
+        dateInput.value = "";
     }
 
 }
 
-export function addTask(taskText, description, status = false) {
+export function addTask(taskText, description, date, status = false) {
     let taskList = document.getElementById("task-list");
 
     let taskItem = document.createElement("li");
     let taskSpan = document.createElement("span");
     taskSpan.textContent = taskText;
+    taskSpan.classList.add("task");
 
 
-    let descriptionText = document.createElement("p");
+    let taskDate = document.createElement("span");
+    taskDate.textContent = date;
+    taskDate.style.display = "none";
+    taskDate.classList.add("date");
+
+
+    let descriptionText = document.createElement("span");
     descriptionText.textContent = description;
     descriptionText.style.display = "none";
+    descriptionText.classList.add("description");
 
 
     let removeButton = document.createElement("Button");
@@ -109,6 +132,7 @@ export function addTask(taskText, description, status = false) {
 
     taskItem.appendChild(taskSpan);
     taskItem.appendChild(descriptionText);
+    taskItem.appendChild(taskDate);
     taskItem.appendChild(editButton);
     taskItem.appendChild(removeButton);
     taskItem.appendChild(checkbox);
