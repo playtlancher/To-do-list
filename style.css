@@ -206,3 +206,8 @@ li span {
 .modal span ,.modal input {
     margin-bottom: 1.5rem;
 }
+.modal span{
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
