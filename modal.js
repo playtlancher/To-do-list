@@ -1,18 +1,27 @@
 import {saveTasks} from "./task.js";
 
-let span;
-let input;
+let header;
+let description;
+let inputHeader;
+let inputDescription;
+let selector;
 let timer;
 let modal = document.getElementById("modal")
 
-export function openEditModal(spanEl) {
+export function openEditModal(item) {
     clearModal();
 
+    let headerEl = item.getElementsByClassName("header")[0];
+
+    let descriptionEl = item.getElementsByClassName("description")[0];
+
+
     let modalSpan = document.createElement("span");
-    input = document.createElement("input");
+    inputHeader = document.createElement("input");
+    inputDescription = document.createElement("input");
     let button = document.createElement("button");
 
-    input.id = "modal-input";
+    inputDescription.id = "modal-input";
     button.id = "modal-btn";
 
     modalSpan.textContent = "Enter text";
@@ -20,18 +29,24 @@ export function openEditModal(spanEl) {
 
     button.addEventListener("click", hideEditModal);
 
+
     modal.appendChild(modalSpan);
-    modal.appendChild(input);
+    modal.appendChild(inputHeader);
+    modal.appendChild(inputDescription);
     modal.appendChild(button);
 
-    input.value = spanEl.textContent;
-    span = spanEl;
+    inputHeader.value = headerEl.textContent;
+    inputDescription.value = descriptionEl.textContent;
+    console.log(descriptionEl.textContent);
+    header = headerEl;
+    description = descriptionEl;
     modal.style.display = "flex";
 }
 
 function hideEditModal() {
-    if (input.value !== span.textContent && input.value !== "") {
-        span.textContent = input.value;
+    if (inputHeader.value !== header.textContent && inputHeader.value !== "" && inputDescription !== inputDescription) {
+        header.textContent = inputHeader.value;
+        description.textContent = inputDescription.value;
         saveTasks();
     }
 
@@ -44,9 +59,10 @@ export function openInfoModal(item) {
     modal.style.display = "flex";
     modal.classList.add("modal-info");
 
-    let itemHeader = item.getElementsByClassName("task");
-    let itemDescription = item.getElementsByClassName("description");
+    let itemHeader = item.getElementsByClassName("header")[0];
+    let itemDescription = item.getElementsByClassName("description")[0];
     let itemDate = item.getElementsByClassName("date")[0].textContent;
+    let itemStatus = item.getElementsByClassName("status")[0]
 
 
     let header = document.createElement("span");
@@ -68,10 +84,38 @@ export function openInfoModal(item) {
     let dates = itemDate.split(":");
 
 
-    header.textContent = "Header: " + itemHeader[0].textContent;
-    description.textContent = "Description: " + itemDescription[0].textContent;
+    header.textContent = "Header: " + itemHeader.textContent;
+    description.textContent = "Description: " + itemDescription.textContent;
     recordDate.textContent = "Record date: " + dates[0];
     deadline.textContent = "Deadline date: " + dates[1];
+
+    selector = document.createElement("select");
+    let completed = document.createElement("option");
+    let inProgress = document.createElement("option");
+    let scheduled = document.createElement("option");
+
+    completed.textContent = "Completed";
+    inProgress.textContent = "In progress";
+    scheduled.textContent = "Scheduled";
+    selector.appendChild(scheduled)
+    selector.appendChild(inProgress)
+    selector.appendChild(completed)
+    selector.value = itemStatus.textContent;
+    console.log(itemStatus.textContent);
+    selector.addEventListener("change", function () {
+        let checkbox = item.getElementsByTagName("input")[0];
+        itemStatus.textContent = selector.value;
+        if (selector.value === "Completed") {
+            checkbox.checked = true;
+            itemHeader.style.transform = "rotateX(360deg)";
+            itemHeader.style.textDecoration = "line-through";
+        } else {
+            checkbox.checked = false;
+            itemHeader.style.transform = "rotateX(0deg)";
+            itemHeader.style.textDecoration = "none";
+        }
+        saveTasks();
+    })
 
     modal.appendChild(closeButton);
     modal.appendChild(header);
@@ -79,11 +123,13 @@ export function openInfoModal(item) {
     modal.appendChild(recordDate);
     modal.appendChild(deadline);
     modal.appendChild(timeToDeadline);
+    modal.appendChild(selector);
 
     showTimeRemaining(timeToDeadline, dates[1]);
 
-    timer = setInterval(function() {
+    timer = setInterval(function () {
         showTimeRemaining(timeToDeadline, dates[1]);
+
     }, 1000);
 
 }
@@ -115,11 +161,13 @@ function getTimeRemaining(deadline) {
     };
 }
 
-function showTimeRemaining(span,deadline) {
+function showTimeRemaining(span, deadline) {
     const time = getTimeRemaining(deadline);
-    span.textContent = "Time to deadline: " + time.days + " days " + time.hours + " hours " + time.minutes + " minutes " + time.seconds + " seconds ";
-
+    if (time.total < 0) {
+        span.textContent = "Status: Overdue";
+        selector.style.display = "none"
+        saveTasks();
+    } else {
+        span.textContent = "Time to deadline: " + time.days + " days " + time.hours + " hours " + time.minutes + " minutes " + time.seconds + " seconds ";
+    }
 }
-
-
-

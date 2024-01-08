@@ -7,8 +7,8 @@ let rows = 5;
 class Task {
     date;
     task;
-    status;
     description;
+    status;
 }
 
 export function saveTasks() {
@@ -20,10 +20,10 @@ export function saveTasks() {
     if (taskList) {
         for (let i = 0; i < taskList.children.length; i++) {
             let task = new Task();
-            let taskSpan = taskList.children[i].getElementsByClassName("task")[0].textContent;
+            let taskSpan = taskList.children[i].getElementsByClassName("header")[0].textContent;
             let dateEl = taskList.children[i].getElementsByClassName("date")[0].textContent;
             let description = taskList.children[i].getElementsByClassName("description")[0].textContent;
-            let status = taskList.children[i].querySelector("input").checked;
+            let status = taskList.children[i].getElementsByClassName("status")[0].textContent;
 
             task.task = taskSpan;
             task.date = dateEl;
@@ -62,7 +62,7 @@ export function addTaskByButton() {
     let dateInput = document.getElementById("deadline");
     let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + ":" + dateInput.value;
     if (header.value !== "" && description.value !== "" && dateInput.value !== "") {
-        addTask(header.value, description.value, date);
+        addTask(header.value, description.value, date , "Scheduled");
         header.value = "";
         description.value = "";
         dateInput.value = "";
@@ -70,13 +70,13 @@ export function addTaskByButton() {
 
 }
 
-export function addTask(taskText, description, date, status = false) {
+export function addTask(taskText, description, date, status) {
     let taskList = document.getElementById("task-list");
 
     let taskItem = document.createElement("li");
-    let taskSpan = document.createElement("span");
-    taskSpan.textContent = taskText;
-    taskSpan.classList.add("task");
+    let taskHeader = document.createElement("span");
+    taskHeader.textContent = taskText;
+    taskHeader.classList.add("header");
 
 
     let taskDate = document.createElement("span");
@@ -85,11 +85,15 @@ export function addTask(taskText, description, date, status = false) {
     taskDate.classList.add("date");
 
 
-    let descriptionText = document.createElement("span");
-    descriptionText.textContent = description;
-    descriptionText.style.display = "none";
-    descriptionText.classList.add("description");
+    let descriptionSpan = document.createElement("span");
+    descriptionSpan.textContent = description;
+    descriptionSpan.style.display = "none";
+    descriptionSpan.classList.add("description");
 
+    let statusSpan = document.createElement("span");
+    statusSpan.style.display = "none";
+    statusSpan.classList.add("status");
+    statusSpan.textContent = status;
 
     let removeButton = document.createElement("Button");
     removeButton.textContent = "remove";
@@ -105,34 +109,37 @@ export function addTask(taskText, description, date, status = false) {
     let editButton = document.createElement("button");
     editButton.textContent = "edit";
     editButton.addEventListener("click", function () {
-        openEditModal(taskSpan);
+        openEditModal(taskItem);
     })
 
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.checked = status;
-    if (checkbox.checked) {
-        taskSpan.style.transform = "rotateX(360deg)";
-        taskSpan.style.textDecoration = "line-through";
+    if (status === "Completed") {
+        checkbox.checked = true
+        taskHeader.style.transform = "rotateX(360deg)";
+        taskHeader.style.textDecoration = "line-through";
     }
     checkbox.addEventListener("change", function () {
 
         if (checkbox.checked) {
-            taskSpan.style.transform = "rotateX(360deg)";
-            taskSpan.style.textDecoration = "line-through";
+            statusSpan.textContent = "Completed";
+            taskHeader.style.transform = "rotateX(360deg)";
+            taskHeader.style.textDecoration = "line-through";
         } else {
-            taskSpan.style.transform = "rotateX(0deg)";
-            taskSpan.style.textDecoration = "none";
+            statusSpan.textContent = "Scheduled";
+            taskHeader.style.transform = "rotateX(0deg)";
+            taskHeader.style.textDecoration = "none";
         }
         saveTasks()
     })
     taskItem.classList.add('fade-in');
 
 
-    taskItem.appendChild(taskSpan);
-    taskItem.appendChild(descriptionText);
+    taskItem.appendChild(taskHeader);
+    taskItem.appendChild(descriptionSpan);
     taskItem.appendChild(taskDate);
+    taskItem.appendChild(statusSpan);
     taskItem.appendChild(editButton);
     taskItem.appendChild(removeButton);
     taskItem.appendChild(checkbox);
