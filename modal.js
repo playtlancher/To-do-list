@@ -116,6 +116,12 @@ export function openInfoModal(item) {
         }
         saveTasks();
     })
+    header.classList.add("modal-info-items");
+    description.classList.add("modal-info-items");
+    recordDate.classList.add("modal-info-items");
+    deadline.classList.add("modal-info-items");
+    timeToDeadline.classList.add("modal-info-items");
+
 
     modal.appendChild(closeButton);
     modal.appendChild(header);
