@@ -12,7 +12,7 @@ class Task {
 }
 
 export function saveTasks() {
-    let taskList = document.getElementById("task-list");
+    const taskList = document.getElementById("task-list");
 
 
     let tasks = [];
@@ -20,12 +20,12 @@ export function saveTasks() {
     if (taskList) {
         for (let i = 0; i < taskList.children.length; i++) {
             let task = new Task();
-            let taskSpan = taskList.children[i].getElementsByClassName("header")[0].textContent;
-            let dateEl = taskList.children[i].getElementsByClassName("date")[0].textContent;
-            let description = taskList.children[i].getElementsByClassName("description")[0].textContent;
-            let status = taskList.children[i].getElementsByClassName("status")[0].textContent;
+            let taskText = taskList.children[i].querySelector(".header").textContent;
+            let dateEl = taskList.children[i].querySelector(".date").textContent;
+            let description = taskList.children[i].querySelector(".description").textContent;
+            let status = taskList.children[i].querySelector(".status").textContent;
 
-            task.task = taskSpan;
+            task.task = taskText;
             task.date = dateEl;
             task.description = description;
             task.status = status;
@@ -42,9 +42,7 @@ export function loadTasks() {
 
 
     if (tasks) {
-        for (let i = 0; i < tasks.length; i++) {
-            addTask(tasks[i].task, tasks[i].description, tasks[i].date, tasks[i].status);
-        }
+        tasks.forEach(task => addTask(task.task , task.description , task.date , task.status));
     }
     displayPagination();
     displayList();
@@ -56,18 +54,16 @@ export function loadTheme() {
 
 
 export function addTaskByButton() {
-    const today = new Date();
     let header = document.getElementById("header-input");
     let description = document.getElementById("text-input");
     let dateInput = document.getElementById("deadline");
-    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + ":" + dateInput.value;
+    let date = getCurrentDate() + ":" + dateInput.value;
     if (header.value !== "" && description.value !== "" && dateInput.value !== "") {
         addTask(header.value, description.value, date , "Scheduled");
         header.value = "";
         description.value = "";
         dateInput.value = "";
     }
-
 }
 
 export function addTask(taskText, description, date, status) {
@@ -115,6 +111,7 @@ export function addTask(taskText, description, date, status) {
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+
     if (status === "Completed") {
         checkbox.checked = true
         taskHeader.style.transform = "rotateX(360deg)";
@@ -135,6 +132,12 @@ export function addTask(taskText, description, date, status) {
     })
     taskItem.classList.add('fade-in');
 
+    taskItem.addEventListener("click", function (event) {
+        let target = event.target;
+        if (target.tagName === 'LI' || target.tagName === "SPAN") {
+            openInfoModal(taskItem);
+        }
+    })
 
     taskItem.appendChild(taskHeader);
     taskItem.appendChild(descriptionSpan);
@@ -143,12 +146,6 @@ export function addTask(taskText, description, date, status) {
     taskItem.appendChild(editButton);
     taskItem.appendChild(removeButton);
     taskItem.appendChild(checkbox);
-    taskItem.addEventListener("click", function (event) {
-        let target = event.target;
-        if (target.tagName === 'LI' || target.tagName === "SPAN") {
-            openInfoModal(taskItem);
-        }
-    })
 
     taskList.appendChild(taskItem);
     saveTasks()
@@ -213,3 +210,7 @@ export async function fetchAndFillList() {
     }
 }
 
+function getCurrentDate(){
+    const today = new Date();
+    return  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+}

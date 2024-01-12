@@ -1,12 +1,13 @@
 import {saveTasks} from "./task.js";
+import {createEl} from "./utils.js";
 
 let header;
 let description;
 let inputHeader;
 let inputDescription;
-let selector;
+let statusSelector;
 let timer;
-let modal = document.getElementById("modal")
+const modal = document.getElementById("modal")
 
 export function openEditModal(item) {
     clearModal();
@@ -16,10 +17,10 @@ export function openEditModal(item) {
     let descriptionEl = item.getElementsByClassName("description")[0];
 
 
-    let modalSpan = document.createElement("span");
-    inputHeader = document.createElement("input");
-    inputDescription = document.createElement("input");
-    let button = document.createElement("button");
+    let modalSpan = createEl("span");
+    inputHeader = createEl("input");
+    inputDescription = createEl("input");
+    let button = createEl("button");
 
     inputDescription.id = "modal-input";
     button.id = "modal-btn";
@@ -44,7 +45,7 @@ export function openEditModal(item) {
 }
 
 function hideEditModal() {
-    if (inputHeader.value !== header.textContent && inputHeader.value !== "" && inputDescription !== inputDescription) {
+    if (inputHeader.value !== "" && inputHeader.value !== "" && inputDescription !== "") {
         header.textContent = inputHeader.value;
         description.textContent = inputDescription.value;
         saveTasks();
@@ -59,22 +60,23 @@ export function openInfoModal(item) {
     modal.style.display = "flex";
     modal.classList.add("modal-info");
 
-    let itemHeader = item.getElementsByClassName("header")[0];
-    let itemDescription = item.getElementsByClassName("description")[0];
-    let itemDate = item.getElementsByClassName("date")[0].textContent;
-    let itemStatus = item.getElementsByClassName("status")[0]
+    let itemHeader = item.querySelector(".header");
+    let itemDescription = item.querySelector(".description");
+    let itemDate = item.querySelector(".date").textContent;
+    let itemStatus = item.querySelector(".status");
 
 
-    let header = document.createElement("span");
-    let description = document.createElement("span");
-    let recordDate = document.createElement("span");
-    let deadline = document.createElement("span");
-    let timeToDeadline = document.createElement("span");
+    let header = createEl("span");
+    let description = createEl("span");
+    let recordDate = createEl("span");
+    let deadline = createEl("span");
+    let timeToDeadline = createEl("span");
 
-    let closeButton = document.createElement("button");
+    let closeButton = createEl("button");
 
     closeButton.textContent = "close";
     closeButton.classList.add("margin-left");
+
     closeButton.addEventListener("click", function () {
             hideModal();
             modal.classList.remove("modal-info")
@@ -84,28 +86,32 @@ export function openInfoModal(item) {
     let dates = itemDate.split(":");
 
 
-    header.textContent = "Header: " + itemHeader.textContent;
-    description.textContent = "Description: " + itemDescription.textContent;
-    recordDate.textContent = "Record date: " + dates[0];
-    deadline.textContent = "Deadline date: " + dates[1];
+    header.textContent = `Header: ${itemHeader.textContent}`;
+    description.textContent = `Description: ${itemDescription.textContent}`;
+    recordDate.textContent = `Record date: ${dates[0]}`;
+    deadline.textContent = `Deadline date: ${dates[1]}`;
 
-    selector = document.createElement("select");
-    let completed = document.createElement("option");
-    let inProgress = document.createElement("option");
-    let scheduled = document.createElement("option");
+
+    statusSelector = createEl("select");
+    let completed = createEl("option");
+    let inProgress = createEl("option");
+    let scheduled = createEl("option");
 
     completed.textContent = "Completed";
     inProgress.textContent = "In progress";
     scheduled.textContent = "Scheduled";
-    selector.appendChild(scheduled)
-    selector.appendChild(inProgress)
-    selector.appendChild(completed)
-    selector.value = itemStatus.textContent;
-    console.log(itemStatus.textContent);
-    selector.addEventListener("change", function () {
-        let checkbox = item.getElementsByTagName("input")[0];
-        itemStatus.textContent = selector.value;
-        if (selector.value === "Completed") {
+
+
+    statusSelector.appendChild(scheduled);
+    statusSelector.appendChild(inProgress);
+    statusSelector.appendChild(completed);
+
+    statusSelector.value = itemStatus.textContent;
+
+    statusSelector.addEventListener("change", function () {
+        let checkbox = item.querySelector("input");
+        itemStatus.textContent = statusSelector.value;
+        if (statusSelector.value === "Completed") {
             checkbox.checked = true;
             itemHeader.style.transform = "rotateX(360deg)";
             itemHeader.style.textDecoration = "line-through";
@@ -129,7 +135,7 @@ export function openInfoModal(item) {
     modal.appendChild(recordDate);
     modal.appendChild(deadline);
     modal.appendChild(timeToDeadline);
-    modal.appendChild(selector);
+    modal.appendChild(statusSelector);
 
     showTimeRemaining(timeToDeadline, dates[1]);
 
@@ -148,7 +154,7 @@ function hideModal() {
 function clearModal() {
     clearInterval(timer);
     modal.innerHTML = "";
-
+    saveTasks();
 }
 
 function getTimeRemaining(deadline) {
@@ -171,7 +177,7 @@ function showTimeRemaining(span, deadline) {
     const time = getTimeRemaining(deadline);
     if (time.total < 0) {
         span.textContent = "Status: Overdue";
-        selector.style.display = "none"
+        statusSelector.style.display = "none"
         saveTasks();
     } else {
         span.textContent = "Time to deadline: " + time.days + " days " + time.hours + " hours " + time.minutes + " minutes " + time.seconds + " seconds ";

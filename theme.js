@@ -1,27 +1,30 @@
 let isToggle = false;
+let root = document.documentElement;
 
 export function changeTheme() {
+    localStorage.setItem("theme", isToggle);
     if (isToggle) {
-        let root = document.documentElement;
-        root.style.setProperty("--input-color", "black")
-        root.style.setProperty('--border-color', 'darkgray');
-        root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--background-color", "#333")
+        setRootStyle("--input-color", "black")
+        setRootStyle('--border-color', 'darkgray');
+        setRootStyle('--text-color', 'white');
+        setRootStyle("--background-color", "#333")
     } else {
-        let root = document.documentElement;
-        root.style.setProperty("--input-color", "white")
-        root.style.setProperty('--border-color', 'lightgray');
-        root.style.setProperty('--text-color', 'black');
-        root.style.setProperty("--background-color", "white")
+        setRootStyle("--input-color", "white")
+        setRootStyle('--border-color', 'lightgray');
+        setRootStyle('--text-color', 'black');
+        setRootStyle("--background-color", "white")
 
     }
     isToggle = !isToggle;
-    localStorage.setItem("theme", !isToggle);
 }
 
 export function setTheme(status) {
-    if ("true" === status) {
-        isToggle = !isToggle;
+    if (status === "true") {
+        isToggle = true;
+        changeTheme()
     }
-    changeTheme()
+}
+function setRootStyle(style,value){
+    root.style.setProperty(style,value)
+
 }
