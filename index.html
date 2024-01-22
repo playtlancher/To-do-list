@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <title>To do list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <button id="themeButton">
+        <img src="./theme.svg" alt="change theme button img">
+    </button>
+    <div class="grid-container">
+        <div></div>
+        <div>
+            <form onsubmit="return false">
+                <input id="header-input" placeholder="Enter the header here">
+                <input id="text-input" placeholder="Enter the description here">
+                <label>Enter deadline</label>
+                <input type="date" id="deadline">
+                <button id="add-button">Add</button>
+            </form>
+            <div class="modal fade-in colum-center" id="modal">
+
+            </div>
+            <ul class="colum-center flex-end" id="task-list">
+
+            </ul>
+            <ul id="pagination-container" class="content-center">
+
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <button id="clear-button">Clear tasks</button>
+    </footer>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
