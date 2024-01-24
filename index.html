@@ -12,13 +12,34 @@
     <button id="themeButton">
         <img src="./theme.svg" alt="change theme button img">
     </button>
-    <div class="grid-container">
+    <div class="reg-log grid-container">
+        <div></div>
+        <div>
+            <form id="login-form" onsubmit="return false">
+                <input id="log-username" placeholder="Username">
+                <input type="password" id="log-password" placeholder="Password">
+                <button id="log-button" class="fit-content">Login</button>
+            </form>
+            <form id="registration-form" class="display-none" onsubmit="return false">
+                <input id="reg-username" placeholder="Username">
+                <input type="password" id="reg-password1" placeholder="Password">
+                <input type="password" id="reg-password2" placeholder="Password">
+                <button id="reg-button" class="fit-content">Register</button>
+            </form>
+            <span id="reg-log-span" class="content-center"></span>
+            <div class="colum-center switches">
+                <button id="switch-registration" class="fit-content">Registration</button>
+                <button id="switch-login" class="display-none fit-content">Login</button>
+            </div>
+        </div>
+    </div>
+    <div id="task-page" class="grid-container display-none">
         <div></div>
         <div>
             <form onsubmit="return false">
                 <input id="header-input" placeholder="Enter the header here">
                 <input id="text-input" placeholder="Enter the description here">
-                <label>Enter deadline</label>
+                <span>Enter deadline</span>
                 <input type="date" id="deadline">
                 <button id="add-button">Add</button>
             </form>
@@ -33,9 +54,7 @@
             </ul>
         </div>
     </div>
-    <footer>
-        <button id="clear-button">Clear tasks</button>
-    </footer>
+
     <script type="module" src="main.js"></script>
 </body>
 

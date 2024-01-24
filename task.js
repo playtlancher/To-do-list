@@ -1,10 +1,12 @@
-import { changeTheme, setTheme } from "./theme.js";
+import { isToggle, setTheme } from "./theme.js";
 import { openEditModal, openInfoModal } from "./modal.js";
 import { createEl, createHTML } from "./utils.js";
 
 let currentPage = 0;
-let rows = 5;
+const rows = 5;
 let totalPages;
+let userAccount;
+let isLogin = false;
 
 class Task {
     date;
@@ -18,38 +20,47 @@ export function saveTasks() {
 
 
     let tasks = [];
-    if (taskList) {
+    if (taskList && isLogin) {
         for (let i = 0; i < taskList.children.length; i++) {
-            let task = new Task();
-            let taskText = taskList.children[i].querySelector(".header").textContent;
-            let dateEl = taskList.children[i].querySelector(".date").textContent;
-            let description = taskList.children[i].querySelector(".description").textContent;
-            let status = taskList.children[i].querySelector(".status").textContent;
+            const task = new Task();
+            const taskText = taskList.children[i].querySelector(".header").textContent;
+            const dateEl = taskList.children[i].querySelector(".date").textContent;
+            const description = taskList.children[i].querySelector(".description").textContent;
+            const status = taskList.children[i].querySelector(".status").textContent;
 
             task.task = taskText;
             task.date = dateEl;
             task.description = description;
             task.status = status;
             tasks.push(task);
-
         }
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        userAccount.tasks = tasks;
+        userAccount.theme = isToggle;
 
+        const users = JSON.parse(localStorage.getItem("users"));
+        const index = users.findIndex(user => user.username === userAccount.username);
+
+        if (index !== "-1")
+            users[index] = userAccount;
+
+        localStorage.setItem("users", JSON.stringify(users));
     }
 }
 
-export function loadTasks() {
-    let tasks = JSON.parse(localStorage.getItem("tasks"));
+export function loadTasks(account) {
+    isLogin = true;
+    userAccount = account;
 
-    if (tasks.length) {
+    document.getElementById("add-button").addEventListener("click", addTaskByButton);
+
+    let tasks = account.tasks;
+
+
+    if (tasks) {
         tasks.forEach(task => addTask(task.task, task.description, task.date, task.status));
     }
     displayPagination();
     displayList();
-}
-
-export function loadTheme() {
-    setTheme(localStorage.getItem("theme"));
 }
 
 
@@ -169,23 +180,4 @@ export function displayList(pageNumber = 1) {
 function getCurrentDate() {
     const today = new Date();
     return today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-}
-
-
-export function initPage() {
-    window.onload = function () {
-        loadTheme();
-        loadTasks();
-    };
-    document.getElementById("add-button").addEventListener("click", addTaskByButton);
-    document.getElementById("themeButton").addEventListener("click", changeTheme)
-    document.getElementById("clear-button").addEventListener("click", function () {
-        localStorage.removeItem("tasks");
-        localStorage.removeItem("status");
-        let taskList = document.getElementById("task-list");
-        let pagination = document.getElementById("pagination-container");
-        taskList.innerHTML = "";
-        pagination.innerHTML = "";
-    });
-
 }

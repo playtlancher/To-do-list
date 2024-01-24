@@ -1,8 +1,11 @@
-let isToggle = false;
-let root = document.documentElement;
+import { saveTasks } from "./task.js";
+
+export let isToggle = false;
+const root = document.documentElement;
 
 export function changeTheme() {
-    localStorage.setItem("theme", isToggle);
+    isToggle = !isToggle;
+
     if (isToggle) {
         setRootStyle("--input-color", "black")
         setRootStyle('--border-color', 'darkgray');
@@ -15,15 +18,22 @@ export function changeTheme() {
         setRootStyle("--background-color", "white")
 
     }
-    isToggle = !isToggle;
+    saveTasks();
+
 }
 
 export function setTheme(status) {
-    if (status === "true") {
-        isToggle = true;
+    if (status === true) {
         changeTheme()
     }
 }
 function setRootStyle(style, value) {
     root.style.setProperty(style, value)
 }
+export function initTheme(){
+    document.getElementById("themeButton").addEventListener("click", changeTheme);
+}
+export function loadTheme(userAccount) {
+    if (userAccount.theme)
+        setTheme(userAccount.theme);
+    }

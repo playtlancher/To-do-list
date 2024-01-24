@@ -21,8 +21,3 @@ export function cssClass(classes = "") {
     if (typeof classes === 'string') return classes;
     return classes.join(" ");
 }
-export function li(text, classes = "",style="") {
-    const classList = cssClass(classes);
-    const cssStyle = css(style);
-    return `<li class="${classList} style="${cssStyle}">${text}</li>`;
-}

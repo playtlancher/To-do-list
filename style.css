@@ -86,7 +86,7 @@ form input {
 }
 
 input:focus {
-    border: 2px solid var(--text-color);
+    border: 1px solid var(--text-color);
 }
 
 * {
@@ -200,7 +200,6 @@ li span {
     align-items: flex-start;
 }
 
-.modal span,
 .modal input {
     margin-bottom: 1.5rem;
 }
@@ -222,4 +221,29 @@ li span {
 .strikethrough-animation {
     transform: rotateX(360deg);
     text-decoration: line-through;
+}
+
+.display-none {
+    display: none;
+}
+
+.reg-log button {
+    margin-bottom: 2rem;
+}
+
+.reg-log {
+    justify-content: center;
+}
+
+.reg-log input {
+    width: 60%;
+}
+.reg-log span{
+    margin-bottom: 1rem;
+}
+form span{
+    margin-bottom: 1rem;
+}
+.fit-content {
+    width: fit-content;
 }

@@ -1,4 +1,6 @@
-import { initPage } from "./task.js"
+import { initRegLog } from "./login.js"
+import { initTheme } from "./theme.js";
 
 
-initPage();
+initRegLog();
+initTheme();
