@@ -9,9 +9,13 @@
 </head>
 
 <body>
-    <button id="themeButton">
-        <img src="./theme.svg" alt="change theme button img">
-    </button>
+    <div class="space-between">
+        <button id="themeButton">
+            <img src="./theme.svg" alt="change theme button img">
+        </button>
+        <button class="display-none" id="personal-account-button">Personal account</button>
+        <button class="display-none" id="task-button">Tasks</button>
+    </div>
     <div class="reg-log grid-container">
         <div></div>
         <div>
@@ -31,6 +35,12 @@
                 <button id="switch-registration" class="fit-content">Registration</button>
                 <button id="switch-login" class="display-none fit-content">Login</button>
             </div>
+        </div>
+    </div>
+    <div id="personal-account" class="display-none">
+        <div class="colum-center">
+            <span id="welcome"></span>
+            <span id="nothing"></span>
         </div>
     </div>
     <div id="task-page" class="grid-container display-none">

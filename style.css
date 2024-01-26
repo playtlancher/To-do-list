@@ -247,3 +247,7 @@ form span{
 .fit-content {
     width: fit-content;
 }
+.space-between{
+    display: flex;
+    justify-content: space-between;
+}
