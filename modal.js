@@ -1,5 +1,6 @@
-import { saveTasks } from "./task.js";
+import { changeUser, saveTasks } from "./task.js";
 import { createEl, createHTML } from "./utils.js";
+import { userAccount } from "./task.js";
 
 let headerEl;
 let descriptionEl;
@@ -71,7 +72,7 @@ export function openInfoModal(item) {
 
     closeButton.addEventListener("click", function () {
         hideModal();
-        modal.classList.remove("modal-info")
+        modal.classList.remove("modal-info");
     }
     );
 
@@ -110,12 +111,15 @@ export function openInfoModal(item) {
 function hideModal() {
     modal.style.display = "none";
     clearModal();
+
 }
 
 function clearModal() {
+
     clearInterval(timer);
     modal.innerHTML = "";
     saveTasks();
+
 }
 
 function getTimeRemaining(deadline) {
@@ -143,4 +147,35 @@ function showTimeRemaining(span, deadline) {
     } else {
         span.textContent = "Time to deadline: " + time.days + " days " + time.hours + " hours " + time.minutes + " minutes " + time.seconds + " seconds ";
     }
+}
+export function changePasswordModal(userAccount) {
+    modal.style.display = "flex";
+
+    let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left close"] });
+    html += createHTML("", { tag: "input", placeholder: "Enter new password", id: "new-password-one" });
+    html += createHTML("", { tag: "input", placeholder: "Enter new password again", id: "new-password-two" });
+    html += createHTML("OK", { tag: "button", id: "change-password-modal-button" });
+    html += createHTML("", { tag: "span", id: "password-span" })
+    modal.innerHTML = html;
+    const closeButton = document.getElementById("modal-close-button");
+    const changeButton = document.getElementById("change-password-modal-button");
+    closeButton.addEventListener("click", function () {
+        hideModal();
+        modal.classList.remove("modal-info");
+    });
+    changeButton.addEventListener("click", function () {
+        const password1 = document.getElementById("new-password-one");
+        const password2 = document.getElementById("new-password-two");
+        if (password1.value === password2.value) {
+            userAccount.password = password1.value;
+
+            changeUser(userAccount);
+
+            hideModal();
+        } else {
+            const passwordSpan = document.getElementById("password-span");
+            passwordSpan.textContent = "You've entered different passwords in the fields";
+        }
+    });
+
 }

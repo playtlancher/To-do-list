@@ -27,6 +27,7 @@ export function regestration() {
         regForm.classList.add("display-none");
         logSwitchBtn.classList.add("display-none");
         initPage(user);
+        clearRegFields();
     }
 }
 export function login() {
@@ -37,14 +38,15 @@ export function login() {
         if (user.username === username.value && user.password === password.value) {
             logForm.classList.add("display-none");
             regSwitchBtn.classList.add("display-none");
-            span.textContent = `Welcome , ${username.value}`;
             initPage(user);
+            span.textContent = `Welcome , ${username.value}`;
+
+            clearLoginFields();
             return;
         }
 
     });
-    if (span.textContent !== `Welcome , ${username.value}`)
-        span.textContent = "Invalid username or password"
+
 }
 export function initRegLog() {
     const regBtn = document.getElementById("reg-button");
@@ -56,15 +58,31 @@ export function initRegLog() {
     logSwitchBtn.addEventListener("click", showLogin);
     regSwitchBtn.addEventListener("click", showRegestration);
 }
-function showLogin() {
+export function showLogin() {
     regForm.classList.add("display-none");
     logSwitchBtn.classList.add("display-none");
     regSwitchBtn.classList.remove("display-none");
     logForm.classList.remove("display-none");
+    clearRegFields();
 }
 function showRegestration() {
     regForm.classList.remove("display-none");
     logSwitchBtn.classList.remove("display-none");
     regSwitchBtn.classList.add("display-none");
     logForm.classList.add("display-none");
+    clearLoginFields();
+}
+function clearLoginFields() {
+    const username = document.getElementById("log-username");
+    const password = document.getElementById("log-password");
+    username.value = "";
+    password.value = "";
+}
+function clearRegFields() {
+    let username = document.getElementById("reg-username");
+    let password1 = document.getElementById("reg-password1");
+    let password2 = document.getElementById("reg-password2");
+    username.value = "";
+    password1.value = "";
+    password2.value = "";
 }

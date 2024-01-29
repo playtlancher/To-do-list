@@ -33,14 +33,22 @@
             <span id="reg-log-span" class="content-center"></span>
             <div class="colum-center switches">
                 <button id="switch-registration" class="fit-content">Registration</button>
-                <button id="switch-login" class="display-none fit-content">Login</button>
+                <button id="switch-login" class="display-none fit-content">Log in</button>
             </div>
         </div>
     </div>
+    <div class="modal fade-in colum-center" id="modal">
+
+    </div>
     <div id="personal-account" class="display-none">
         <div class="colum-center">
-            <span id="welcome"></span>
-            <span id="nothing"></span>
+            <h1 id="welcome"></h6>
+                <span id="number-of-complited"></span>
+                <span id="number-of-tasks"></span>
+                <span id="tasks-at-this-moment"></span>
+                <button class="logout-button" id="log-out-button">Log out</button>
+                <button class="change-password-button" id="change-password-button">Change password</button>
+                <button class="delete-account-button" id="delete-account-button">Delete account</button>
         </div>
     </div>
     <div id="task-page" class="grid-container display-none">
@@ -53,9 +61,7 @@
                 <input type="date" id="deadline">
                 <button id="add-button">Add</button>
             </form>
-            <div class="modal fade-in colum-center" id="modal">
 
-            </div>
             <ul class="colum-center flex-end" id="task-list">
 
             </ul>

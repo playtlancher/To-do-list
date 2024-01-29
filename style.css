@@ -238,16 +238,71 @@ li span {
 .reg-log input {
     width: 60%;
 }
-.reg-log span{
+
+.reg-log span {
     margin-bottom: 1rem;
 }
-form span{
+
+form span {
     margin-bottom: 1rem;
 }
+
 .fit-content {
     width: fit-content;
 }
-.space-between{
+
+.space-between {
     display: flex;
     justify-content: space-between;
+}
+
+.delete-account-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-account-button:hover {
+    background-color: #ff6666;
+}
+
+.logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #555;
+
+}
+
+
+.change-password-button {
+    background-color: #4285f4;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.change-password-button:hover {
+    background-color: #4d90fe;
+}
+
+#personal-account button , #personal-account span{
+margin-bottom: 1rem;
 }

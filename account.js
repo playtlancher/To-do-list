@@ -3,8 +3,11 @@ export class account{
     password;
     tasks;
     theme;
+    numberOfTasks;
+    NumberOfComnplited;
     constructor(username , password){
         this.username = username
         this.password = password;
     }
+
 }

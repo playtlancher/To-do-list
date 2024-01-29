@@ -5,8 +5,11 @@ import { createEl, createHTML } from "./utils.js";
 let currentPage = 0;
 const rows = 5;
 let totalPages;
-let userAccount;
+export let userAccount;
 let isLogin = false;
+export let numberOfComplited = 0;
+export let numberOfTasks = 0;
+export let numberOfTasksNow = 0;
 
 class Task {
     date;
@@ -34,31 +37,39 @@ export function saveTasks() {
             task.status = status;
             tasks.push(task);
         }
-        userAccount.tasks = tasks;
-        userAccount.theme = isToggle;
+        if (userAccount !== "") {
+            userAccount.tasks = tasks;
+            userAccount.theme = isToggle;
+            userAccount.numberOfComplited = numberOfComplited;
+            userAccount.numberOfTasks = numberOfTasks
 
-        const users = JSON.parse(localStorage.getItem("users"));
-        const index = users.findIndex(user => user.username === userAccount.username);
+            const users = JSON.parse(localStorage.getItem("users"));
+            const index = users.findIndex(user => user.username === userAccount.username);
 
-        if (index !== "-1")
-            users[index] = userAccount;
+            if (index !== "-1")
+                users[index] = userAccount;
 
-        localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("users", JSON.stringify(users));
+        }
     }
 }
 
 export function loadTasks(account) {
-    isLogin = true;
     userAccount = account;
 
     document.getElementById("add-button").addEventListener("click", addTaskByButton);
 
     let tasks = account.tasks;
-
+    if(userAccount.numberOfComplited!==undefined)
+    numberOfComplited = userAccount.numberOfComplited;
+    if(userAccount.numberOfTasks!==undefined)
+    numberOfTasks = userAccount.numberOfTasks;
 
     if (tasks) {
         tasks.forEach(task => addTask(task.task, task.description, task.date, task.status));
     }
+    isLogin = true;
+
     displayPagination();
     displayList();
 }
@@ -75,6 +86,7 @@ export function addTaskByButton() {
         description.value = "";
         dateInput.value = "";
     }
+    numberOfTasks++;
 }
 
 export function addTask(taskText, description, date, status) {
@@ -100,6 +112,7 @@ export function addTask(taskText, description, date, status) {
     removeButton.addEventListener("click", function () {
         taskItem.classList.add('disappear-animation');
         taskItem.addEventListener("animationend", function () {
+            numberOfTasksNow--;
             taskList.removeChild(taskItem);
             displayPagination();
             displayList(totalPages);
@@ -114,14 +127,18 @@ export function addTask(taskText, description, date, status) {
     if (status === "Completed") {
         checkbox.checked = true
         header.classList.add("strikethrough-animation");
+        if (isLogin)
+            numberOfComplited++;
     }
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             statusEl.textContent = "Completed";
             header.classList.add("strikethrough-animation");
+            numberOfComplited++;
         } else {
             statusEl.textContent = "Scheduled";
             header.classList.remove("strikethrough-animation");
+            numberOfComplited--;
         }
         saveTasks()
     })
@@ -132,14 +149,20 @@ export function addTask(taskText, description, date, status) {
             openInfoModal(taskItem);
         }
     })
-
+    numberOfTasksNow++;
     taskList.appendChild(taskItem);
     displayPagination();
     displayList(totalPages);
     saveTasks()
 
 }
-
+export function changeUser(user) {
+    userAccount = user;
+    saveTasks();
+}
+export function saveUsers(users){
+    localStorage.setItem("users", JSON.stringify(users));
+}
 
 export function displayPagination() {
     let taskList = document.getElementById("task-list");
