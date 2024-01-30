@@ -60,10 +60,10 @@ export function loadTasks(account) {
     document.getElementById("add-button").addEventListener("click", addTaskByButton);
 
     let tasks = account.tasks;
-    if(userAccount.numberOfComplited!==undefined)
-    numberOfComplited = userAccount.numberOfComplited;
-    if(userAccount.numberOfTasks!==undefined)
-    numberOfTasks = userAccount.numberOfTasks;
+    if (userAccount.numberOfComplited !== undefined)
+        numberOfComplited = userAccount.numberOfComplited;
+    if (userAccount.numberOfTasks !== undefined)
+        numberOfTasks = userAccount.numberOfTasks;
 
     if (tasks) {
         tasks.forEach(task => addTask(task.task, task.description, task.date, task.status));
@@ -127,6 +127,7 @@ export function addTask(taskText, description, date, status) {
     if (status === "Completed") {
         checkbox.checked = true
         header.classList.add("strikethrough-animation");
+        taskItem.classList.add("done");
         if (isLogin)
             numberOfComplited++;
     }
@@ -134,10 +135,12 @@ export function addTask(taskText, description, date, status) {
         if (checkbox.checked) {
             statusEl.textContent = "Completed";
             header.classList.add("strikethrough-animation");
+            taskItem.classList.add("done");
             numberOfComplited++;
         } else {
             statusEl.textContent = "Scheduled";
             header.classList.remove("strikethrough-animation");
+            taskItem.classList.remove("done");
             numberOfComplited--;
         }
         saveTasks()
@@ -160,7 +163,7 @@ export function changeUser(user) {
     userAccount = user;
     saveTasks();
 }
-export function saveUsers(users){
+export function saveUsers(users) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 

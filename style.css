@@ -3,6 +3,8 @@
     --border-color: "lightgray";
     --text-color: "black";
     --background-color: "white";
+    --done-task-color: #757575 ;
+    --done-task-text: white;
 }
 
 
@@ -305,4 +307,31 @@ form span {
 
 #personal-account button , #personal-account span{
 margin-bottom: 1rem;
+}
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+footer {
+    background-color: var(--footer-background-color);
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: left;
+}
+
+
+footer a{
+    text-decoration: none;
+    color: #4285f4;
+}
+.done{
+    background-color: var(--done-task-color);
+    color: var(--done-task-text);
 }

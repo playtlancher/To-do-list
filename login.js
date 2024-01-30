@@ -19,7 +19,7 @@ export function regestration() {
         return;
     }
 
-    if (password1.value === password2.value) {
+    if (password1.value === password2.value && username!=="" && password1 !=="") {
         const user = new account(username.value, password1.value);
         users.push(user);
         localStorage.setItem("users", JSON.stringify(users));
