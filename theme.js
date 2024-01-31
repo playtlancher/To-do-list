@@ -11,7 +11,7 @@ export function changeTheme() {
         setRootStyle('--border-color', 'darkgray');
         setRootStyle('--text-color', 'white');
         setRootStyle("--background-color", "#333");
-        setRootStyle("--done-task-color", "#424242");
+        setRootStyle("--done-task-color", "#505050");
 
     } else {
         setRootStyle("--input-color", "white");

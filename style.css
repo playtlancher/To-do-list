@@ -2,7 +2,7 @@
     --input-color: "white";
     --border-color: "lightgray";
     --text-color: "black";
-    --background-color: "white";
+    --background-color: #f9f9f9;
     --done-task-color: #757575 ;
     --done-task-text: white;
 }
@@ -124,7 +124,8 @@ button {
 }
 
 .fade-in {
-    animation: fadeIn 0.5s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes fadeIn {
@@ -332,6 +333,32 @@ footer a{
     color: #4285f4;
 }
 .done{
-    background-color: var(--done-task-color);
+    background-color: var(--done-task-color); 
+    transition: background-color 0.3s ease-in-out;
     color: var(--done-task-text);
+    transition: color 0.3s ease-in-out;
+
+}
+@keyframes disappearAnimation {
+    0% { transform: scaleX(1) scaleY(1); }
+    50% { transform: scaleY(1.5) scaleX(0.5); }
+    100% { transform: scaleX(1) scaleY(1); }
+}
+
+li.disappear-animation {
+    animation: disappearAnimation 0.3s ease-out;
+}
+li:hover {
+    background-color: #e6f7ff;
+    color: black;
+    transition: color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+
+}
+input:focus {
+    background-color: #e6f7ff;
+    color: black;
+    transition: color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+
 }
