@@ -3,72 +3,175 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
     <title>To do list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div class="space-between">
-        <button id="themeButton">
-            <img src="./theme.svg" alt="change theme button img">
-        </button>
-        <button class="display-none" id="personal-account-button">Personal account</button>
-        <button class="display-none" id="task-button">Tasks</button>
-    </div>
-    <header class="content-center">
-        <h1>My To-Do List</h1>
-    </header>
-    <div class="reg-log grid-container">
-        <div></div>
-        <div>
-            <form id="login-form" onsubmit="return false">
-                <input id="log-username" placeholder="Username">
-                <input type="password" id="log-password" placeholder="Password">
-                <button id="log-button" class="fit-content">Login</button>
-            </form>
-            <form id="registration-form" class="display-none" onsubmit="return false">
-                <input id="reg-username" placeholder="Username">
-                <input type="password" id="reg-password1" placeholder="Password">
-                <input type="password" id="reg-password2" placeholder="Password">
-                <button id="reg-button" class="fit-content">Register</button>
-            </form>
-            <span id="reg-log-span" class="content-center"></span>
-            <div class="colum-center switches">
-                <button id="switch-registration" class="fit-content">Registration</button>
-                <button id="switch-login" class="display-none fit-content">Log in</button>
+    <div id="limiter" class="limiter fade-in">
+        <div class="container-login100">
+            <div id="reg-log-wrap" class="wrap">
+                <form id="login-form" class="login100-form validate-form" onsubmit="return false">
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input id="log-username" class="input100" type="text" name="Username">
+                        <span class="focus-input100" data-placeholder="Username"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="log-password" class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button id="login-button" class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div id="switch-sign-up-button-conteiner" class="text-center p-t-115">
+                    <span class="txt1">
+                        Don’t have an account?
+                    </span>
+
+                    <button id="switch-registration" class="txt2 guidance">
+                        Sign Up
+                    </button>
+                </div>
+                <form id="registration-form" class="login100-form validate-form display-none" onsubmit="return false">
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input id="reg-username" class="input100" type="text" name="Username">
+                        <span class="focus-input100" data-placeholder="Username"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="reg-password1" class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="reg-password2" class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button id="sign-up-button" class="login100-form-btn">
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div id="switch-login-button-conteiner" class="text-center p-t-115 display-none">
+                    <span class="txt1">
+                        Have an account?
+                    </span>
+
+                    <button id="switch-login" class="txt2 guidance">
+                        Log in
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal fade-in colum-center" id="modal">
+
+    <div class="flex-end display-none">
+
+        <button class="display-none" id="personal-account-button">Personal account</button>
+        <button class="display-none" id="task-button">Tasks</button>
+    </div>
+
+
+    <div class="modal-window fade-in colum-center" id="modal">
 
     </div>
     <div id="personal-account" class="display-none">
         <div class="colum-center">
-            <h1 id="welcome"></h6>
-                <span id="number-of-complited"></span>
-                <span id="number-of-tasks"></span>
-                <span id="tasks-at-this-moment"></span>
-                <button class="logout-button" id="log-out-button">Log out</button>
-                <button class="change-password-button" id="change-password-button">Change password</button>
-                <button class="delete-account-button" id="delete-account-button">Delete account</button>
+            <h1 id="welcome"></h1>
+            <span id="number-of-complited"></span>
+            <span id="number-of-tasks"></span>
+            <span id="tasks-at-this-moment"></span>
+            <button class="logout-button" id="log-out-button">Log out</button>
+            <button class="change-password-button" id="change-password-button">Change password</button>
+            <button class="delete-account-button" id="delete-account-button">Delete account</button>
         </div>
     </div>
-    <div id="task-page" class="grid-container display-none">
+    <div id="task-page" class="grid-container display-none fade-in">
         <div></div>
         <div>
-            <form onsubmit="return false">
-                <input id="header-input" placeholder="Enter the header here">
-                <input id="text-input" placeholder="Enter the description here">
-                <span>Enter deadline</span>
-                <input type="date" id="deadline">
-                <button id="add-button">Add</button>
+            <header class="content-center m-t-20">
+                <h1>My To-Do List</h1>
+            </header>
+            <form id="task-form" class="wrap" onsubmit="return false">
+                <div class="wrap-input100">
+                    <input id="header-input" class="input100">
+                    <span class="focus-input100" data-placeholder="Header"></span>
+                </div>
+                <div class="wrap-input100">
+                    <input id="text-input" class="input100" >
+                    <span class="focus-input100" data-placeholder="Description"></span>
+                </div>
+                <div class="wrap-input100">
+                    <input id="deadline" class="input100" type="date">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button id="add-button" class="login100-form-btn">
+                            Add task
+                        </button>
+                    </div>
+                </div>
             </form>
 
-            <ul class="colum-center flex-end" id="task-list">
+            <ul class="colum-center flex-end wrap m-t-10 fade-in" id="task-list">
 
             </ul>
-            <ul id="pagination-container" class="content-center">
+            <ul id="pagination-container" class="content-center fade-in">
 
             </ul>
         </div>
@@ -76,7 +179,24 @@
     <footer>
         <p>&copy; 2024 My To-Do List App by <a href="https://github.com/playtlancher">playtlancher</a></p>
     </footer>
-    <script type="module" src="main.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script type="module" src="js/main.js"></script>
+    <script src="js/login.js"></script>
+
 </body>
 
 </html>
