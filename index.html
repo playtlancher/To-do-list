@@ -118,25 +118,36 @@
         </div>
     </div>
 
-    <div class="flex-end display-none">
-
-        <button class="display-none" id="personal-account-button">Personal account</button>
-        <button class="display-none" id="task-button">Tasks</button>
+    <div class="right">
+        <button class="display-none" id="personal-account-button"><img src="./images/abstract-user-flat-3.png"
+                alt="personal-account"></button>
+        <button class="display-none" id="task-button"><img src="./images/notebook-logo.png"></button>
     </div>
 
 
     <div class="modal-window fade-in colum-center" id="modal">
 
     </div>
-    <div id="personal-account" class="display-none">
-        <div class="colum-center">
-            <h1 id="welcome"></h1>
-            <span id="number-of-complited"></span>
-            <span id="number-of-tasks"></span>
-            <span id="tasks-at-this-moment"></span>
-            <button class="logout-button" id="log-out-button">Log out</button>
-            <button class="change-password-button" id="change-password-button">Change password</button>
-            <button class="delete-account-button" id="delete-account-button">Delete account</button>
+    <div id="personal-account" class="fade-in display-none profile-card ">
+        <div class="profile-cover">
+            <div class="profile-avatar">
+                <img src="https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png" alt="Anis M" />
+            </div>
+            <div class="profile-details">
+                <h1 id="username-h1"></h1>
+            </div>
+            <ul class="content-center fs-20 fw-b">
+                <li id="number-of-complited"></li>
+                <li id="number-of-tasks"></li>
+                <li id="tasks-at-this-moment"></li>
+            </ul>
+            <div class="content-center ">
+                <button class="logout-button" id="log-out-button">Log out</button>
+                <button class="change-password-button" id="change-password-button">Change password</button>
+                <button class="delete-account-button" id="delete-account-button">Delete account</button>
+            </div>
+
+
         </div>
     </div>
     <div id="task-page" class="grid-container display-none fade-in">
@@ -151,7 +162,7 @@
                     <span class="focus-input100" data-placeholder="Header"></span>
                 </div>
                 <div class="wrap-input100">
-                    <input id="text-input" class="input100" >
+                    <input id="text-input" class="input100">
                     <span class="focus-input100" data-placeholder="Description"></span>
                 </div>
                 <div class="wrap-input100">

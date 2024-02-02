@@ -2,7 +2,7 @@ import { openEditModal, openInfoModal } from "./modal.js";
 import { createEl, createHTML } from "./utils.js";
 
 let currentPage = 0;
-const rows = 4;
+const rows = 3;
 let totalPages;
 export let userAccount;
 let isLogin = false;

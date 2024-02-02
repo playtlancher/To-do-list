@@ -1,5 +1,5 @@
 import { changeUser, saveTasks } from "./task.js";
-import { createEl, createHTML , div } from "./utils.js";
+import { createEl, createHTML, div } from "./utils.js";
 import { userAccount } from "./task.js";
 
 let headerEl;
@@ -16,18 +16,16 @@ export function openEditModal(item) {
     headerEl = item.querySelector(".header");
     descriptionEl = item.querySelector(".description");
 
-    // let html = createHTML("Enter text", { tag: "span", });
-    // html += createHTML(headerEl.textContent, { tag: "input", id: "modal-header-input", class:[] });
-    // html += createHTML(descriptionEl.textContent, { tag: "input", id: "modal-description-input", class:[]});
-    let inputHtml = createHTML(headerEl.textContent, {tag:"input" , id: "modal-header-input" , classes:["input100"]});
-    inputHtml += `<span class="focus-input100" data-placeholder="Header"></span>`;
-    let html = div(inputHtml,{classes:["wrap-input100"]});
-    inputHtml = createHTML(descriptionEl.textContent, {tag:"input" , id: "modal-description-input" , classes:["input100"]});
-    inputHtml += `<span class="focus-input100" data-placeholder="Description"></span>`;
-    html += div(inputHtml,{classes:["wrap-input100"]});
-    inputHtml = div("",{classes:["login100-form-bgbtn"]});
-    inputHtml += createHTML("OK",{tag:"button" , classes: "login100-form-btn"})
-    html += div(div(inputHtml,{classes:["wrap-login100-form-btn"]}),{classes:["container-wrap-login100-form-btn"]})
+
+    let inputHtml = createHTML(headerEl.textContent, { tag: "input", id: "modal-header-input", classes: ["input100"] });
+    inputHtml += `<span class="focus-input100"></span>`;
+    let html = div(inputHtml, { classes: ["wrap-input100"] });
+    inputHtml = createHTML(descriptionEl.textContent, { tag: "input", id: "modal-description-input", classes: ["input100"] });
+    inputHtml += `<span class="focus-input100"></span>`;
+    html += div(inputHtml, { classes: ["wrap-input100"] });
+    inputHtml = div("", { classes: ["login100-form-bgbtn"] });
+    inputHtml += createHTML("OK", { tag: "button", classes: "login100-form-btn" })
+    html += div(div(inputHtml, { classes: ["wrap-login100-form-btn"] }), { classes: ["container-wrap-login100-form-btn"] })
 
     modal.innerHTML = html;
 
@@ -66,7 +64,7 @@ export function openInfoModal(item) {
     let dates = itemDate.split(":");
 
 
-    let html = createHTML("close", { tag: "button", id: "modal-close-button" , classes: ["margin-left fs-20"] });
+    let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left fs-20"] });
     html += createHTML(`Header: ${itemHeader.textContent}`, { tag: "span", classes: ["modal-info-items header"] });
     html += createHTML(`Description: ${itemDescription.textContent}`, { tag: "span", classes: ["modal-info-items description"] });
     html += createHTML(`Record date: ${dates[0]}`, { tag: "span", classes: ["modal-info-items record-date"] });

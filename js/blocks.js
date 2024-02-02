@@ -16,7 +16,7 @@ export class TextBlock extends Block {
         const { id = "", tag = "span", style = "", classes = "" } = this.options;
         const cssStyle = css(style);
         const classList = cssClass(classes);
-        return `<${tag} style = "${cssStyle}" , id = "${id}" class = "${classList}">${this.value}</${tag}>`;
+        return `<${tag} style="${cssStyle}" , id="${id}" class="${classList}">${this.value}</${tag}>`;
     }
 }
 export class InputBlock extends Block {
@@ -28,9 +28,9 @@ export class InputBlock extends Block {
         const cssStyle = css(style);
         const classList = cssClass(classes);
         if (type === "checkbox") {
-            return `<${tag} type="${type}" style = "${cssStyle}" class = "${classList}">`;
+            return `<${tag} type="${type}" style="${cssStyle}" class="${classList}">`;
         } else {
-            return `<${tag} type="${type}" style = "${cssStyle}" id = "${id}" class = "${classList}" placeholder="${placeHolder}" value="${this.value}">`;
+            return `<${tag} type="${type}" style="${cssStyle}" id="${id}" class="${classList}" placeholder="${placeHolder}" value="${this.value}">`;
         }
     }
 }

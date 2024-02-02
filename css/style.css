@@ -19,17 +19,13 @@
     justify-content: center;
     padding: 40px 40px;
 }
-#task-list{
+
+#task-list {
     width: 100vh;
     padding: 10px 20px;
 }
-.delete-button{
-    background-color: #e74c3c;;
-    color: black;
-    border-radius: 8px;
-    padding: 8px;
-}
-li {
+
+#task-page li {
     list-style-type: none;
     display: flex;
     justify-content: flex-end;
@@ -79,21 +75,9 @@ ul li>* {
     margin-right: 0.7rem;
 }
 
-
-
-
-.task-input:focus {
-    border: 1px solid var(--text-color);
-}
-
 * {
     font-family: sans-serif;
 }
-
-/* body {
-    background: var(--background-color);
-    color: var(--text-color);
-} */
 
 .task-button {
     border-radius: 5px;
@@ -122,6 +106,7 @@ ul li>* {
 .fade-out {
     animation: fadeIn 0.5s ease-in-out;
 }
+
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -131,9 +116,11 @@ ul li>* {
         opacity: 0;
     }
 }
+
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -182,6 +169,13 @@ li span {
 .pagination-btn {
     border-radius: 50%;
     margin-right: 0.7rem;
+    background: #6a7dfe;
+    background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
+    background: -o-linear-gradient(left, #21d4fd, #b721ff);
+    background: -moz-linear-gradient(left, #21d4fd, #b721ff);
+    background: linear-gradient(left, #21d4fd, #b721ff);
+    padding: 2px 8px;
+    color: white;
 }
 
 .margin-left {
@@ -249,7 +243,7 @@ li span {
 }
 
 .delete-account-button {
-    background-color: #ff4d4d;
+    background-color: #555; /*ff4d4d*/
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -264,7 +258,7 @@ li span {
 }
 
 .logout-button {
-    background-color: #e74c3c;
+    background-color: #555;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -275,13 +269,13 @@ li span {
 }
 
 .logout-button:hover {
-    background-color: #555;
+    background-color: #e74c3c;
 
 }
 
 
 .change-password-button {
-    background-color: #4285f4;
+    background-color: #555; /* 4285f4*/
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -315,7 +309,8 @@ footer {
     width: 100%;
     text-align: left;
 }
-.guidance:hover{
+
+.guidance:hover {
     color: #6a7dfe;
     color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
     color: -o-linear-gradient(left, #21d4fd, #b721ff);
@@ -329,28 +324,11 @@ footer {
     background: -o-linear-gradient(left, #21d4fd, #b721ff);
     background: -moz-linear-gradient(left, #21d4fd, #b721ff);
     background: linear-gradient(left, #21d4fd, #b721ff);
-    color: #1f264e;
-
+    color: white;
+    transition: color 0.5s ease-in-out;
 }
 
-
-.task:hover {
-    background-color: #e6f7ff;
-    color: black;
-    transition: color 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-
-}
-
-.task-input:focus {
-    background-color: #e6f7ff;
-    color: black;
-    transition: color 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-
-}
-
-#modal-close-button{
+#modal-close-button {
     color: black;
     font-weight: bold;
     border-radius: 8px;
@@ -358,9 +336,119 @@ footer {
     background-color: rgb(245, 215, 215);
     padding: 2px 3px;
 }
-.edit-button{
+
+.edit-button {
     background-color: #3498db;
     color: black;
     border-radius: 8px;
     padding: 8px;
+}
+.edit-button:hover{
+    background: rgb(82, 200, 255);
+    transition: background 0.3s ease-in;
+}
+.delete-button {
+    background-color: #ff5252;
+    ;
+    color: black;
+    border-radius: 8px;
+    padding: 8px;
+}
+.delete-button:hover{
+    background: rgb(211, 0, 0);
+    transition: background 0.3s ease-in;
+}
+.fw-b{
+    font-weight: bold;
+}
+#personal-account li {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--input-color);
+    padding: 10px;
+    width: auto;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#personal-account-button img , #task-button img{
+    max-height: 2rem;
+    max-width: 2rem;
+    margin: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-card .profile-cover:hover {
+    filter: none;
+    /* filter: none;
+    -webkit-filter: none; */
+}
+.profile-avatar {
+
+    position: absolute;
+    margin: 25px auto 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 50%;
+    transition: all .5s;
+}
+ */
+.profile-avatar img{
+    max-width: 20vw;
+    max-height: 20vh;
+    filter: none;
+}
+
+.profile-card .profile-cover .profile-details {
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid rgba(0,0,0,0.5);
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 0 7px;
+}
+
+.profile-card .profile-content {
+    background: #ffffff; 
+    background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 100%);
+    border: 1px solid #cccccc;
+    border-top: none;
+
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.menu-container .profile-actions {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+
+    border-radius: 5px;
+}
+.right { float: right; }
+
+
+
+.profile-card .profile-cover {
+    
+    background: url("../images/mountain_peak_4k.jpg") no-repeat center;
+    position: relative;
+    height: 80vh;
+    background-size: cover;  
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    filter: gray;
+    -webkit-filter: grayscale(1); 
+
+    transition: all .5s;
 }
