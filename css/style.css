@@ -319,14 +319,15 @@ footer {
 }
 
 .done {
-    background: #6a7dfe;
-    background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-    background: -o-linear-gradient(left, #21d4fd, #b721ff);
-    background: -moz-linear-gradient(left, #21d4fd, #b721ff);
-    background: linear-gradient(left, #21d4fd, #b721ff);
+    background: #6a7dfe !important;
+    background: -webkit-linear-gradient(left, #21d4fd, #b721ff) !important ;
+    background: -o-linear-gradient(left, #21d4fd, #b721ff) !important;
+    background: -moz-linear-gradient(left, #21d4fd, #b721ff) !important;
+    background: linear-gradient(left, #21d4fd, #b721ff) !important;
     color: white;
-    transition: color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out ;
 }
+
 
 #modal-close-button {
     color: black;
