@@ -15,6 +15,9 @@ const taskList = document.getElementById("task-list");
 const logOutButton = document.getElementById("log-out-button");
 const deleteAccountButton = document.getElementById("delete-account-button");
 const footer = document.querySelector("footer");
+const limiter = document.getElementById("limiter");
+const usernameH1 = document.getElementById("username-h1");
+
 
 let userAccount;
 
@@ -22,7 +25,7 @@ export function initPage(account) {
     userAccount = account;
     loadTasks(userAccount);
     showTaskPage();
-    // personalButton.classList.remove("display-none");
+    personalButton.classList.remove("display-none");
     taskButton.addEventListener("click", hidePersonalAccount);
     personalButton.addEventListener("click", showPersonalAccount);
     changePasswordButton.addEventListener("click", changePassword);
@@ -41,6 +44,7 @@ function showPersonalAccount() {
     taskPage.classList.add("display-none");
     personalButton.classList.add("display-none");
     footer.classList.add("display-none");
+    usernameH1.textContent = userAccount.username;
     numberOfComplitedSpan.innerHTML = div(numberOfComplited, {}) + "Complited";
     tasksNowSpan.innerHTML = div(numberOfTasksNow, {}) + "Tasks now";
     numberOfTasksSpan.innerHTML = div(numberOfTasks,{})+"All Tasks";
@@ -62,8 +66,9 @@ function logOut() {
     showLogin();
     taskButton.classList.add("display-none");
     personalAccount.classList.add("display-none");
-    taskPage.classList.add("display:none");
-
+    taskPage.classList.add("display-none");
+    limiter.classList.remove("display-none");
+    numberOfTasksNow = 9;
 }
 function deleteAccount() {
     logOut();

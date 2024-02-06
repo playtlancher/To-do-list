@@ -185,12 +185,13 @@ li span {
 .modal-info {
     display: flex;
     flex-direction: column;
-
 }
 
 .modal input {
     margin-bottom: 1.5rem;
 }
+
+
 
 .modal span {
 
@@ -199,7 +200,7 @@ li span {
     white-space: pre-line;
 }
 
-.modal-info-items {
+.modal-items {
     background-color: #eee1e1;
     border-radius: 4px;
     border: 2px solid black;
@@ -243,7 +244,8 @@ li span {
 }
 
 .delete-account-button {
-    background-color: #555; /*ff4d4d*/
+    background-color: #555;
+    /*ff4d4d*/
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -275,7 +277,7 @@ li span {
 
 
 .change-password-button {
-    background-color: #555; /* 4285f4*/
+    background-color: #555;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -320,12 +322,12 @@ footer {
 
 .done {
     background: #6a7dfe !important;
-    background: -webkit-linear-gradient(left, #21d4fd, #b721ff) !important ;
+    background: -webkit-linear-gradient(left, #21d4fd, #b721ff) !important;
     background: -o-linear-gradient(left, #21d4fd, #b721ff) !important;
     background: -moz-linear-gradient(left, #21d4fd, #b721ff) !important;
     background: linear-gradient(left, #21d4fd, #b721ff) !important;
     color: white;
-    transition: color 0.5s ease-in-out ;
+    transition: color 0.5s ease-in-out;
 }
 
 
@@ -344,10 +346,12 @@ footer {
     border-radius: 8px;
     padding: 8px;
 }
-.edit-button:hover{
+
+.edit-button:hover {
     background: rgb(82, 200, 255);
     transition: background 0.3s ease-in;
 }
+
 .delete-button {
     background-color: #ff5252;
     ;
@@ -355,13 +359,16 @@ footer {
     border-radius: 8px;
     padding: 8px;
 }
-.delete-button:hover{
+
+.delete-button:hover {
     background: rgb(211, 0, 0);
     transition: background 0.3s ease-in;
 }
-.fw-b{
+
+.fw-b {
     font-weight: bold;
 }
+
 #personal-account li {
     list-style-type: none;
     display: flex;
@@ -374,7 +381,9 @@ footer {
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-#personal-account-button img , #task-button img{
+
+#personal-account-button img,
+#task-button img {
     max-height: 2rem;
     max-width: 2rem;
     margin: 10px;
@@ -384,30 +393,14 @@ footer {
 
 .profile-card .profile-cover:hover {
     filter: none;
-    /* filter: none;
-    -webkit-filter: none; */
-}
-.profile-avatar {
-
-    position: absolute;
-    margin: 25px auto 0;
-    left: 0;
-    right: 0;
-
-    border-radius: 50%;
-    transition: all .5s;
-}
- */
-.profile-avatar img{
-    max-width: 20vw;
-    max-height: 20vh;
     filter: none;
+    -webkit-filter: none;
 }
 
 .profile-card .profile-cover .profile-details {
-    background: rgba(0,0,0,0.4);
-    border-top: 1px solid rgba(0,0,0,0.5);
-    color: #ffffff;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    color: #747373;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -418,38 +411,123 @@ footer {
 }
 
 .profile-card .profile-content {
-    background: #ffffff; 
-    background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 100%);
+    background: #ffffff;
+    background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%);
     border: 1px solid #cccccc;
     border-top: none;
 
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
 .menu-container .profile-actions {
     border: 1px solid rgba(0, 0, 0, 0.8);
 
     border-radius: 5px;
 }
-.right { float: right; }
 
+.right {
+    float: right;
+}
 
+.profile-avatar img {
+    max-width: 100%;
+    max-height: 100%;
+}
 
 .profile-card .profile-cover {
-    
     background: url("../images/mountain_peak_4k.jpg") no-repeat center;
     position: relative;
-    height: 80vh;
-    background-size: cover;  
+    height: 100vh;
+    background-size: cover;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-
-    filter: gray;
-    -webkit-filter: grayscale(1); 
-
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
     transition: all .5s;
+}
+
+.profile-avatar {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border: 5px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    max-width: 30vh;
+    max-height: 40vh;
+    overflow: hidden;
+    align-items: center;
+
+    border-radius: 50%;
+    transition: all .5s;
+
+}
+
+.profile-avatar {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fallAndBounce 1.5s ease forwards;
+}
+
+@keyframes fallAndBounce {
+    0% {
+        top: -200px;
+        opacity: 0;
+    }
+
+    50% {
+        top: 45%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(-45%);
+    }
+
+    70% {
+        top: 40%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    100% {
+        top: 45%;
+        transform: translateX(-50%) translateY(-45%);
+    }
+}
+
+.profile-details {
+    position: absolute;
+    top: 63%;
+}
+#username-h1 {
+    display: inline-block; 
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px; 
+}
+
+.profile-details ul #number-of-complited:hover {
+    background-color: #00cc00;
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.profile-details ul #number-of-tasks:hover {
+    background-color: #ff6600;
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.profile-details ul #tasks-at-this-moment:hover {
+    background-color: #3366ff;
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.profile-details #username-h1:hover {
+    background-color: #3366ff;
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }

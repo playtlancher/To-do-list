@@ -25,8 +25,6 @@ export function regestration() {
         const user = new account(username.value, password1.value);
         users.push(user);
         localStorage.setItem("users", JSON.stringify(users));
-        regForm.classList.add("display-none");
-        loginBtnConteiner.classList.add("display-none");
         limiter.classList.add("display-none");
 
         initPage(user);
@@ -38,8 +36,7 @@ export function login() {
     const password = document.getElementById("log-password");
     users.forEach(user => {
         if (user.username === username.value && user.password === password.value) {
-            logForm.classList.add("display-none");
-            signUpBtnConteiner.classList.add("display-none");
+
             limiter.classList.add("display-none");
             initPage(user);
 

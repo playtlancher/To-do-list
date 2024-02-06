@@ -1,6 +1,5 @@
 import { changeUser, saveTasks } from "./task.js";
 import { createEl, createHTML, div } from "./utils.js";
-import { userAccount } from "./task.js";
 
 let headerEl;
 let descriptionEl;
@@ -65,11 +64,11 @@ export function openInfoModal(item) {
 
 
     let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left fs-20"] });
-    html += createHTML(`Header: ${itemHeader.textContent}`, { tag: "span", classes: ["modal-info-items header"] });
-    html += createHTML(`Description: ${itemDescription.textContent}`, { tag: "span", classes: ["modal-info-items description"] });
-    html += createHTML(`Record date: ${dates[0]}`, { tag: "span", classes: ["modal-info-items record-date"] });
-    html += createHTML(`Deadline date: ${dates[1]}`, { tag: "span", classes: ["modal-info-items deadline"] });
-    html += createHTML("", { tag: "span", classes: ["modal-info-items timeToDeadline"] });
+    html += createHTML(`Header: ${itemHeader.textContent}`, { tag: "span", classes: ["modal-items header"] });
+    html += createHTML(`Description: ${itemDescription.textContent}`, { tag: "span", classes: ["modal-items description"] });
+    html += createHTML(`Record date: ${dates[0]}`, { tag: "span", classes: ["modal-items record-date"] });
+    html += createHTML(`Deadline date: ${dates[1]}`, { tag: "span", classes: ["modal-items deadline"] });
+    html += createHTML("", { tag: "span", classes: ["modal-items timeToDeadline"] });
     modal.innerHTML = html;
 
     let header = modal.querySelector(".header");
@@ -158,11 +157,16 @@ function showTimeRemaining(span, deadline) {
     }
 }
 export function changePasswordModal(userAccount) {
+
     modal.style.display = "flex";
 
     let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left"] });
-    html += createHTML("", { tag: "input", placeholder: "Enter new password", id: "new-password-one" });
-    html += createHTML("", { tag: "input", placeholder: "Enter new password again", id: "new-password-two" });
+    let inputHtml = createHTML("", { tag: "input", id: "new-password-one", classes: ["input100"] });
+    inputHtml += `<span class="focus-input100"></span>`;
+    html += div(inputHtml, { classes: ["wrap-input100"] });
+    inputHtml = createHTML("", { tag: "input", id: "new-password-two", classes: ["input100"] });
+    inputHtml += `<span class="focus-input100"></span>`;
+    html += div(inputHtml, { classes: ["wrap-input100"] });
     html += createHTML("OK", { tag: "button", id: "change-password-modal-button" });
     html += createHTML("", { tag: "span", id: "password-span" })
     modal.innerHTML = html;
