@@ -1,3 +1,4 @@
+import { updateAvatar } from "./page.js";
 import { changeUser, saveTasks } from "./task.js";
 import { createEl, createHTML, div } from "./utils.js";
 
@@ -189,5 +190,29 @@ export function changePasswordModal(userAccount) {
             passwordSpan.textContent = "You've entered different passwords in the fields";
         }
     });
+}
+export function changeAvatarModal(user) {
+    modal.style.display = "flex";
 
+    let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left"] });
+    let inputHtml = createHTML("", { tag: "input", id: "avatar-input", placeholder: "Picture url", classes: ["input100"] });
+    inputHtml += `<span class="focus-input100"></span>`;
+    html += div(inputHtml, { classes: ["wrap-input100"] });
+    html += createHTML("OK", { tag: "button", id: "change-avatar-modal-button" });
+
+    modal.innerHTML = html;
+    const closeButton = document.getElementById("modal-close-button");
+    closeButton.addEventListener("click", function () {
+        hideModal();
+    });
+    const changeButton = document.getElementById("change-avatar-modal-button");
+    changeButton.addEventListener("click", function () {
+        const avatarInput = document.getElementById("avatar-input");
+
+        if (avatarInput.value !== "") {
+            user.avatarUrl = avatarInput.value;
+            updateAvatar(user);
+        }
+        hideModal();
+    });
 }

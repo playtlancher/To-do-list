@@ -4,7 +4,8 @@ export class account{
     tasks;
     theme;
     numberOfTasks;
-    NumberOfComnplited;
+    numberOfComnplited;
+    avatarUrl;
     constructor(username , password){
         this.username = username
         this.password = password;
