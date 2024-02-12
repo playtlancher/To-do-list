@@ -195,7 +195,7 @@ export function changeAvatarModal(user) {
     modal.style.display = "flex";
 
     let html = createHTML("close", { tag: "button", id: "modal-close-button", classes: ["margin-left"] });
-    let inputHtml = createHTML("", { tag: "input", id: "avatar-input", placeholder: "Picture url", classes: ["input100"] });
+    let inputHtml = createHTML("", { tag: "input", id: "avatar-input", placeHolder: "Picture url", classes: ["input100"] });
     inputHtml += `<span class="focus-input100"></span>`;
     html += div(inputHtml, { classes: ["wrap-input100"] });
     html += createHTML("OK", { tag: "button", id: "change-avatar-modal-button" });
